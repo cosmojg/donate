@@ -185,6 +185,7 @@ def build_html():
             color: {BG};
             text-decoration: none;
         }}
+        .experimental {{ margin-top: 1.5rem; font-size: 0.9rem; }}
         .back {{ margin-top: 2.5rem; }}
         .back a {{ color: #a89984; }}
         ::selection {{ background-color: {GOLD}; color: {BG}; }}
@@ -209,6 +210,8 @@ def build_html():
         </div>
 
         <p class="muted">Thank you. &#9829;</p>
+
+        <p class="experimental"><a href="https://www.cipherpay.app/buy/donate-5-eur">Experimental: Donate 5 EUR with CipherPay!</a></p>
 
         <p class="back"><a href="https://cosmo.red/">&larr; cosmo.red</a></p>
     </main>
