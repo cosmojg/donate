@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>donate</title>
+    <meta name="description" content="Support cosmo's work with a Zcash donation.">
+    <meta name="color-scheme" content="dark">
+    <link rel="icon" href="favicon.svg">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #282828;
+            color: #ebdbb2;
+            line-height: 1.5;
+        }
+        main {
+            margin: auto;
+            max-width: 70ch;
+            padding: 2ch;
+            text-align: center;
+        }
+        h1 {
+            color: #fabd2f;
+            margin-bottom: 0.25rem;
+        }
+        p { margin: 0.75rem 0; }
+        .muted { color: #a89984; }
+        a { color: #fabd2f; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .qr {
+            display: block;
+            width: min(76vw, 300px);
+            height: auto;
+            margin: 1.5rem auto 1rem;
+        }
+        .addr {
+            display: block;
+            max-width: 54ch;
+            margin: 1rem auto;
+            padding: 0.85rem 1rem;
+            background-color: #32302f;
+            border: 1px solid #504945;
+            border-radius: 8px;
+            color: #ebdbb2;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            text-align: left;
+            word-break: break-all;
+            user-select: all;
+        }
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        button, .btn {
+            font: inherit;
+            color: #fabd2f;
+            background-color: transparent;
+            border: 1px solid #fabd2f;
+            border-radius: 8px;
+            padding: 0.5rem 1.2rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.15s, color 0.15s;
+        }
+        button:hover, .btn:hover {
+            background-color: #fabd2f;
+            color: #282828;
+            text-decoration: none;
+        }
+        .back { margin-top: 2.5rem; }
+        .back a { color: #a89984; }
+        ::selection { background-color: #fabd2f; color: #282828; }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>donate</h1>
+        <p class="muted">Support my work with a <a href="https://z.cash/">Zcash</a> donation.</p>
+
+        <img class="qr" src="zcash-qr.svg" width="300" height="300"
+            alt="QR code for cosmo's Zcash unified address">
+
+        <p class="muted">Scan the code, tap to open your wallet, or copy the unified address:</p>
+
+        <code class="addr" id="addr">u1qlrh06j0mlta7xdarj6yjxj7wyt3z0lhkt4kuudhlmlc8nd3mr7tau4tqquy73tsexuhh4c2jxld0wvlgf7953a8u54fd9t92s7jtr6gnrpfguwj6ua323snf3xrym9d79w6p8yny7yfx9sdshqpaty7rgn49r6hn7wvm7zfyuu0lr08</code>
+
+        <div class="actions">
+            <button id="copy" type="button" aria-label="Copy Zcash address to clipboard">copy address</button>
+            <a class="btn" href="zcash:u1qlrh06j0mlta7xdarj6yjxj7wyt3z0lhkt4kuudhlmlc8nd3mr7tau4tqquy73tsexuhh4c2jxld0wvlgf7953a8u54fd9t92s7jtr6gnrpfguwj6ua323snf3xrym9d79w6p8yny7yfx9sdshqpaty7rgn49r6hn7wvm7zfyuu0lr08">open in wallet</a>
+        </div>
+
+        <p class="muted">Thank you. &#9829;</p>
+
+        <p class="back"><a href="https://cosmo.red/">&larr; cosmo.red</a></p>
+    </main>
+
+    <script>
+        const button = document.getElementById("copy");
+        const address = document.getElementById("addr").textContent;
+        button.addEventListener("click", async () => {
+            try {
+                await navigator.clipboard.writeText(address);
+            } catch (err) {
+                const range = document.createRange();
+                range.selectNode(document.getElementById("addr"));
+                const sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(range);
+                document.execCommand("copy");
+                sel.removeAllRanges();
+            }
+            const label = button.textContent;
+            button.textContent = "copied!";
+            setTimeout(() => { button.textContent = label; }, 1500);
+        });
+    </script>
+</body>
+
+</html>
